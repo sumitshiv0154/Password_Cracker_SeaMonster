@@ -1,0 +1,55 @@
+import itertools
+
+def generate_passwords(info_list, patterns):
+    """
+    Generate possible passwords using personal information and patterns.
+
+    :param info_list: List of personal information (e.g., names, birthdays).
+    :param patterns: List of password patterns (e.g., 'Name123', 'Birthday123').
+    :return: List of generated passwords.
+    """
+    passwords = []
+    for pattern in patterns:
+        for info in info_list:
+            password = pattern.format(info=info)
+            passwords.append(password)
+    return passwords
+
+def save_passwords_to_file(passwords, filename):
+    """
+    Save generated passwords to a file.
+
+    :param passwords: List of generated passwords.
+    :param filename: Filename to save the passwords.
+    """
+    with open(filename, 'w') as file:
+        for password in passwords:
+            file.write(password + '\n')
+
+def main():
+    # List of personal information
+    info_list = [
+        "JohnDoe",
+        "JaneDoe",
+        "AliceSmith",
+        "BobJohnson",
+        "EveBrown"
+    ]
+
+    # List of password patterns
+    patterns = [
+        "{}{}{}",
+        "{0}123",
+        "{0}Birthday",
+        "{0}!",
+        "{0}2023"
+    ]
+
+    # Generate passwords
+    passwords = generate_passwords(info_list, patterns)
+
+    # Save passwords to a file
+    save_passwords_to_file(passwords, 'passwords.txt')
+
+if __name__ == "__main__":
+    main()
